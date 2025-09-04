@@ -1,0 +1,41 @@
+import matplotlib.pyplot as plt
+import networkx as nx
+
+# Create a directed graph
+G = nx.DiGraph()
+
+# Add nodes (components)
+G.add_node("Power Input")
+G.add_node("Capacitor C1")
+G.add_node("Resistor R1")
+G.add_node("IC/Controller")
+G.add_node("Capacitor C2")
+G.add_node("Transistor Q1")
+G.add_node("Relay Coil")
+G.add_node("Diode D1")
+G.add_node("Relay Contacts")
+G.add_node("Terminal Block: REMOTE")
+G.add_node("Terminal Block: LAMP/LASER")
+G.add_node("Load: Lamp/Laser")
+G.add_node("Control Signal")
+
+# Add edges (connections)
+G.add_edge("Power Input", "Capacitor C1")
+G.add_edge("Capacitor C1", "Resistor R1")
+G.add_edge("Resistor R1", "IC/Controller")
+G.add_edge("Power Input", "Capacitor C2")
+G.add_edge("Capacitor C2", "Transistor Q1")
+G.add_edge("Transistor Q1", "Relay Coil")
+G.add_edge("Control Signal", "Terminal Block: REMOTE")
+G.add_edge("Terminal Block: REMOTE", "IC/Controller")
+G.add_edge("IC/Controller", "Transistor Q1")
+G.add_edge("Relay Coil", "Diode D1")
+G.add_edge("Diode D1", "Relay Contacts")
+G.add_edge("Relay Contacts", "Terminal Block: LAMP/LASER")
+G.add_edge("Terminal Block: LAMP/LASER", "Load: Lamp/Laser")
+
+# Draw the graph
+pos = nx.spring_layout(G)
+nx.draw(G, pos, with_labels=True, node_color='lightblue', node_size=1500, font_size=8, font_weight='bold', arrows=True)
+plt.title("Functional Circuit Diagram")
+plt.show()
